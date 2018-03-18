@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0676BD7F-FFB5-4C38-9AAC-160462FCBF38}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TestFFMPEG.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="D:\ffmpeg-convert\ffconvert.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TestFFMPEG">
+        <MSBuild Projects="TestFFMPEG.dproj"/>
+    </Target>
+    <Target Name="TestFFMPEG:Clean">
+        <MSBuild Projects="TestFFMPEG.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestFFMPEG:Make">
+        <MSBuild Projects="TestFFMPEG.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ffconvert">
+        <MSBuild Projects="D:\ffmpeg-convert\ffconvert.dproj"/>
+    </Target>
+    <Target Name="ffconvert:Clean">
+        <MSBuild Projects="D:\ffmpeg-convert\ffconvert.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ffconvert:Make">
+        <MSBuild Projects="D:\ffmpeg-convert\ffconvert.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TestFFMPEG;ffconvert"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TestFFMPEG:Clean;ffconvert:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TestFFMPEG:Make;ffconvert:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
